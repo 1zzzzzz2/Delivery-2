@@ -14,7 +14,6 @@
 
         body {
             background-color: #f5f7fa;
-            /* 👇 在这里替换成你的本地背景图片路径 */
             background-image: url('background.jpg');
             background-size: cover;
             background-position: center;
@@ -49,7 +48,9 @@
         .login-container {
             max-width: 420px;
             margin: 60px auto;
-            background: white;
+            /* 半透明核心 */
+            background: rgba(255, 255, 255, 0.349);
+            backdrop-filter: blur(4px);
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
@@ -77,6 +78,7 @@
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 15px;
+            background: rgba(255,255,255,0.9);
         }
 
         button {
@@ -108,12 +110,10 @@
                 gap: 10px;
                 padding: 15px;
             }
-
             .nav-links a {
                 margin: 0 8px;
                 font-size: 14px;
             }
-
             .login-container {
                 margin: 30px 20px;
                 padding: 30px 25px;
@@ -133,7 +133,7 @@
     </div>
 
     <div class="login-container">
-        <h2>Seller Login</title>
+        <h2>Seller Login</h2>
         <form id="loginForm">
             <div class="form-group">
                 <label>Username</label>
@@ -155,7 +155,6 @@
         const password = document.getElementById('password');
         const usernameError = document.getElementById('usernameError');
         const passwordError = document.getElementById('passwordError');
-
         const alphanumeric = /^[a-zA-Z0-9]+$/;
 
         form.addEventListener('submit', function(e) {
@@ -183,4 +182,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
