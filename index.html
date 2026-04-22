@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car - Online Car Sale</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1>AutoMart</h1>
+            <nav>
+                <a href="#">Back to Seller Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="form-wrapper">
+            <h2>List Your Vehicle</h2>
+            <p class="subtitle">Provide details to help buyers find your car quickly.</p>
+            
+            <form id="addCarForm" action="#" method="POST" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="model">Car Model</label>
+                        <input type="text" id="model" name="model" placeholder="e.g. Toyota Camry" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="year">Manufacturing Year</label>
+                        <input type="number" id="year" name="year" placeholder="e.g. 2020" min="1900" max="2026" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="color">Exterior Colour</label>
+                        <input type="text" id="color" name="color" placeholder="e.g. Pearl White" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="e.g. Haidian, Beijing" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="price">Price (¥)</label>
+                        <input type="number" id="price" name="price" placeholder="Enter amount" min="0" required>
+                    </div>
+
+                    <div class="form-group full-width upload-group">
+                        <label for="image">Car Image</label>
+                        <div class="file-upload-box">
+                            <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
+                            <span class="upload-hint">Click or drag image here (JPG/PNG only)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Confirm & Publish</button>
+                    <button type="reset" class="btn-secondary">Reset Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
