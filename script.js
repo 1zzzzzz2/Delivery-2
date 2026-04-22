@@ -77,8 +77,8 @@ form.addEventListener("submit", function(event) {
         isValid = false;
     }
 
-        if (!isValid) {
-        event.preventDefault();
+    if (!isValid) {
+    event.preventDefault();
     }
 
 });
