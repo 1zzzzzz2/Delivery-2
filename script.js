@@ -11,6 +11,36 @@ form.addEventListener("submit", function(event) {
 
     let isValid = true;
 
+    if (name.trim() === "") {
+        alert("Name cannot be empty");
+       isValid = false;
+    }
+
+    if (address.trim() === "") {
+       alert("Address cannot be empty");
+      isValid = false;
+    }
+
+    if (phone.trim() === "") {
+       alert("Phone number cannot be empty");
+        isValid = false;
+    }
+
+    if (email.trim() === "") {
+       alert("Email cannot be empty");
+      isValid = false;
+    }
+
+    if (username.trim() === "") {
+        alert("Username cannot be empty");
+        isValid = false;
+    }
+
+    if (password.trim() === "") {
+      alert("Password cannot be empty");
+     isValid = false;
+    }
+
     const namePattern = /^[A-Za-z\s]+$/;
     if (!namePattern.test(name)) {
         alert("Name should only contain letters and spaces");
