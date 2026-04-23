@@ -47,13 +47,13 @@ form.addEventListener("submit", function(event) {
         isValid = false;
     }
 
-    const emailPattern = /^[^@]+@[^@]+\.(com|cn)$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.(com|cn)$/;
     if (!emailPattern.test(email)) {
         alert("Email must end with .com or .cn");
         isValid = false;
     }
 
-    const phonePattern = /^1\d{10}$/;
+    const phonePattern = /^1[3-9]\d{9}$/;
     if (!phonePattern.test(phone)) {
         alert("Phone number is not valid");
         isValid = false;
