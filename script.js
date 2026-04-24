@@ -2,6 +2,13 @@ const form = document.getElementById("registerForm");
 
 form.addEventListener("submit", function(event) {
 
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("addressError").textContent = "";
+    document.getElementById("phoneError").textContent = "";
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("usernameError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+
     const name = form.elements["name"].value;
     const email = form.elements["email"].value;
     const phone = form.elements["phone"].value;
@@ -12,68 +19,68 @@ form.addEventListener("submit", function(event) {
     let isValid = true;
 
     if (name.trim() === "") {
-        alert("Name cannot be empty");
-       isValid = false;
+        document.getElementById("nameError").textContent = "Name cannot be empty";
+        isValid = false;
     }
 
     if (address.trim() === "") {
-       alert("Address cannot be empty");
-      isValid = false;
+        document.getElementById("addressError").textContent = "Address cannot be empty";
+        isValid = false;
     }
 
     if (phone.trim() === "") {
-       alert("Phone number cannot be empty");
+        document.getElementById("phoneError").textContent = "Phone number cannot be empty";
         isValid = false;
     }
 
     if (email.trim() === "") {
-       alert("Email cannot be empty");
-      isValid = false;
+        document.getElementById("emailError").textContent = "Email cannot be empty";
+        isValid = false;
     }
 
     if (username.trim() === "") {
-        alert("Username cannot be empty");
+        document.getElementById("usernameError").textContent = "Username cannot be empty";
         isValid = false;
     }
 
     if (password.trim() === "") {
-      alert("Password cannot be empty");
-     isValid = false;
+        document.getElementById("passwordError").textContent = "Password cannot be empty";
+        isValid = false;
     }
 
     const namePattern = /^[A-Za-z\s]+$/;
-    if (!namePattern.test(name)) {
-        alert("Name should only contain letters and spaces");
+    if (name !== "" && !namePattern.test(name)) {
+        document.getElementById("nameError").textContent = "Only letters and spaces allowed";
         isValid = false;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.(com|cn)$/;
-    if (!emailPattern.test(email)) {
-        alert("Email must end with .com or .cn");
+    if (email !== "" && !emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Invalid email format";
         isValid = false;
     }
 
     const phonePattern = /^1[3-9]\d{9}$/;
-    if (!phonePattern.test(phone)) {
-        alert("Phone number is not valid");
+    if (phone !== "" && !phonePattern.test(phone)) {
+        document.getElementById("phoneError").textContent = "Invalid phone number";
         isValid = false;
     }
 
     const passPattern = /^[A-Za-z0-9]{6,}$/;
-    if (!passPattern.test(password)) {
-        alert("Password must be at least 6 letters or numbers");
+    if (password !== "" && !passPattern.test(password)) {
+        document.getElementById("passwordError").textContent = "At least 6 letters or numbers";
         isValid = false;
     }
 
     const addressPattern = /^[A-Za-z0-9\s]+$/;
-    if (!addressPattern.test(address)) {
-        alert("Address can only contain letters, numbers and spaces");
+    if (address !== "" && !addressPattern.test(address)) {
+        document.getElementById("addressError").textContent = "Only letters, numbers and spaces allowed";
         isValid = false;
     }
 
     const userPattern = /^[A-Za-z0-9]{6,}$/;
-    if (!userPattern.test(username)) {
-        alert("Username must be at least 6 letters or numbers");
+    if (username !== "" && !userPattern.test(username)) {
+        document.getElementById("usernameError").textContent = "At least 6 letters or numbers";
         isValid = false;
     }
 
