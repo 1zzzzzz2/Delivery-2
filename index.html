@@ -125,6 +125,34 @@
         }
     </style>
 </head>
+<script>
+    const form = document.getElementById('addCarForm');
+    const imageInput = document.getElementById('image');
+
+    // 图片预览逻辑
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const previewBox = document.querySelector('.file-upload-box');
+                previewBox.style.backgroundImage = `url(${event.target.result})`;
+                previewBox.style.backgroundSize = 'cover';
+                previewBox.querySelector('.upload-hint').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        const year = document.getElementById('year').value;
+        const currentYear = new Date().getFullYear();
+        if (year > currentYear + 1) {
+            alert('Please enter a valid manufacturing year.');
+            e.preventDefault();
+        }
+    });
+</script>
 <body>
     <header class="site-header">
         <div class="header-container">
