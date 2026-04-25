@@ -81,7 +81,8 @@
 
         .subtitle {
             text-align: center;
-            color: #555;
+            color: #222;
+            font-weight: 500;
             margin-bottom: 40px;
             font-size: 16px;
         }
@@ -186,7 +187,7 @@
         }
 
         .car-info {
-            color: #555;
+            color: #333;
             font-size: 14px;
             line-height: 1.4;
         }
@@ -194,7 +195,7 @@
         footer {
             text-align: center;
             padding: 22px;
-            color: #444;
+            color: #222;
             font-size: 14px;
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(10px);
@@ -269,44 +270,52 @@
     <script>
         const cars = [
             {
-                model: "Toyota Camry",
-                year: 2022,
-                color: "Black",
-                price: "$28,500",
+                model: "Mercedes-Benz S-Class",
+                year: 2023,
+                color: "Silver",
+                price: "$110,000",
                 location: "Beijing",
-                image: "https://static.autohome.com/Upload/Photo/Series/2024/4/17/800-528-0-1-1713357528565536434.jpg"
+                image: "Mercedes-Benz S-Class.jpg"
             },
             {
-                model: "BMW 3 Series",
-                year: 2021,
+                model: "Porsche 911",
+                year: 2022,
                 color: "White",
-                price: "$35,900",
+                price: "$120,000",
                 location: "Shanghai",
-                image: "https://static.autohome.com/Upload/Photo/Series/2025/1/15/800-528-0-1-1736932708261515333.jpg"
+                image: "Porsche 911.jpg"
+            },
+            {
+                model: "Audi A4",
+                year: 2023,
+                color: "White",
+                price: "$38,000",
+                location: "Guangzhou",
+                image: "Audi A4.jpg"
+            },
+            {
+                model: "Audi A6",
+                year: 2022,
+                color: "Black",
+                price: "$55,000",
+                location: "Shenzhen",
+                image: "Audi A6.jpg"
+            },
+            {
+                model: "Toyota Camry",
+                year: 2024,
+                color: "Silver",
+                price: "$30,000",
+                location: "Hangzhou",
+                image: "Camry.jpg"
             },
             {
                 model: "Honda Civic",
-                year: 2022,
-                color: "Blue",
-                price: "$24,800",
-                location: "Guangzhou",
-                image: "https://static.autohome.com/Upload/Photo/Series/2024/11/12/800-528-0-1-1731375366222622333.jpg"
-            },
-            {
-                model: "Toyota RAV4",
-                year: 2020,
-                color: "Silver",
-                price: "$26,200",
-                location: "Shenzhen",
-                image: "https://static.autohome.com/Upload/Photo/Series/2025/1/17/800-528-0-1-1737082813222622333.jpg"
-            },
-            {
-                model: "Honda CR-V",
-                year: 2022,
-                color: "Red",
-                price: "$27,300",
-                location: "Hangzhou",
-                image: "https://static.autohome.com/Upload/Photo/Series/2024/9/26/800-528-0-1-1727333333333333333.jpg"
+                year: 2021,
+                color: "Yellow",
+                price: "$25,000",
+                location: "Chengdu",
+                image: "Civic.jpg"
             }
         ];
 
@@ -331,7 +340,7 @@
         function showCars(carArray) {
             carList.innerHTML = "";
             if (carArray.length === 0) {
-                carList.innerHTML = `<p style="color:#666;">No cars found for your search.</p>`;
+                carList.innerHTML = `<p style="color:#333;">No cars found for your search.</p>`;
             } else {
                 carArray.forEach(car => {
                     const div = document.createElement("div");
