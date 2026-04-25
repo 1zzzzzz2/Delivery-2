@@ -129,7 +129,7 @@
     const form = document.getElementById('addCarForm');
     const imageInput = document.getElementById('image');
 
-    // 图片预览逻辑
+    // Image Preview Logic
     imageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
@@ -144,6 +144,7 @@
         }
     });
 
+    // Form Validation Logic
     form.addEventListener('submit', function(e) {
         const year = document.getElementById('year').value;
         const currentYear = new Date().getFullYear();
