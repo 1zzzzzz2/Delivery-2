@@ -11,7 +11,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             /* 1. Set background image */
-            background: url('porsche.png') no-repeat center center fixed;
+            background: url('porsche.png.png') no-repeat center center fixed;
             background-size: cover;
             color: #333;
             min-height: 100vh;
@@ -24,13 +24,12 @@
             backdrop-filter: blur(5px);
         }
 
-        /* 修改后的页眉容器样式 */
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: space-between; /* 使标题靠左，导航靠右 */
+            justify-content: space-between; 
             align-items: center;
         }
 
@@ -38,7 +37,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            /* 表单主体依然保持左对齐 */
             display: flex;
             justify-content: flex-start; 
             align-items: center;
@@ -135,7 +133,7 @@
         </div>
     </header>
 
-    <main class="container">
+    <main class="container" style="min-height: auto; justify-content: space-between;" >
         <section class="form-wrapper">
             <h2>List Your Vehicle</h2>
             <p class="subtitle">Provide details to help buyers find your car quickly.</p>
