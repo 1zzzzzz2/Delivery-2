@@ -149,7 +149,6 @@
 
         .results {
             margin-top: 40px;
-            display: none;
         }
 
         .results h3 {
@@ -165,24 +164,31 @@
             border-radius: 12px;
             margin-bottom: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            cursor: pointer;
-            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        .car-item:hover {
-            transform: translateX(4px);
+        .car-image {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
-        .car-item h4 {
+        .car-detail {
+            flex: 1;
+        }
+
+        .car-detail h4 {
             color: #0066cc;
             margin-bottom: 8px;
         }
 
         .car-info {
-            display: flex;
-            gap: 16px;
             color: #555;
             font-size: 14px;
+            line-height: 1.4;
         }
 
         footer {
@@ -211,9 +217,9 @@
             .search-container {
                 padding: 35px 25px;
             }
-            .car-info {
+            .car-item {
                 flex-direction: column;
-                gap: 4px;
+                text-align: center;
             }
         }
     </style>
@@ -250,7 +256,7 @@
             </form>
 
             <div class="results" id="results">
-                <h3>Search Results</h3>
+                <h3>Cars For Sale</h3>
                 <div id="carList"></div>
             </div>
         </div>
@@ -262,47 +268,90 @@
 
     <script>
         const cars = [
-            { model: "Toyota Camry", year: 2022, color: "Black", price: "$28,500", location: "Beijing" },
-            { model: "BMW 3 Series", year: 2021, color: "White", price: "$35,900", location: "Shanghai" },
-            { model: "Honda Civic", year: 2022, color: "Blue", price: "$24,800", location: "Guangzhou" },
-            { model: "Toyota RAV4", year: 2020, color: "Silver", price: "$26,200", location: "Shenzhen" },
-            { model: "Honda CR-V", year: 2022, color: "Red", price: "$27,300", location: "Hangzhou" }
+            {
+                model: "Toyota Camry",
+                year: 2022,
+                color: "Black",
+                price: "$28,500",
+                location: "Beijing",
+                image: "https://static.autohome.com/Upload/Photo/Series/2024/4/17/800-528-0-1-1713357528565536434.jpg"
+            },
+            {
+                model: "BMW 3 Series",
+                year: 2021,
+                color: "White",
+                price: "$35,900",
+                location: "Shanghai",
+                image: "https://static.autohome.com/Upload/Photo/Series/2025/1/15/800-528-0-1-1736932708261515333.jpg"
+            },
+            {
+                model: "Honda Civic",
+                year: 2022,
+                color: "Blue",
+                price: "$24,800",
+                location: "Guangzhou",
+                image: "https://static.autohome.com/Upload/Photo/Series/2024/11/12/800-528-0-1-1731375366222622333.jpg"
+            },
+            {
+                model: "Toyota RAV4",
+                year: 2020,
+                color: "Silver",
+                price: "$26,200",
+                location: "Shenzhen",
+                image: "https://static.autohome.com/Upload/Photo/Series/2025/1/17/800-528-0-1-1737082813222622333.jpg"
+            },
+            {
+                model: "Honda CR-V",
+                year: 2022,
+                color: "Red",
+                price: "$27,300",
+                location: "Hangzhou",
+                image: "https://static.autohome.com/Upload/Photo/Series/2024/9/26/800-528-0-1-1727333333333333333.jpg"
+            }
         ];
 
-        const form = document.getElementById("searchForm");
-        const results = document.getElementById("results");
         const carList = document.getElementById("carList");
+        const form = document.getElementById("searchForm");
+
+        window.addEventListener("load", function() {
+            showCars(cars);
+        });
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             const model = document.getElementById("model").value.toLowerCase();
             const year = parseInt(document.getElementById("year").value);
 
-            const filtered = cars.filter(car => 
+            const filtered = cars.filter(car =>
                 car.model.toLowerCase().includes(model) && car.year === year
             );
+            showCars(filtered);
+        });
 
+        function showCars(carArray) {
             carList.innerHTML = "";
-            if (filtered.length === 0) {
+            if (carArray.length === 0) {
                 carList.innerHTML = `<p style="color:#666;">No cars found for your search.</p>`;
             } else {
-                filtered.forEach(car => {
+                carArray.forEach(car => {
                     const div = document.createElement("div");
                     div.className = "car-item";
                     div.innerHTML = `
-                        <h4>${car.model}</h4>
-                        <div class="car-info">
-                            <span>Year: ${car.year}</span>
-                            <span>Color: ${car.color}</span>
-                            <span>Price: ${car.price}</span>
-                            <span>Location: ${car.location}</span>
+                        <img src="${car.image}" class="car-image" alt="${car.model}">
+                        <div class="car-detail">
+                            <h4>${car.model}</h4>
+                            <div class="car-info">
+                                Year: ${car.year}<br>
+                                Color: ${car.color}<br>
+                                Price: ${car.price}<br>
+                                Location: ${car.location}
+                            </div>
                         </div>
                     `;
                     carList.appendChild(div);
                 });
             }
-            results.style.display = "block";
-        });
+        }
     </script>
 </body>
 </html>
