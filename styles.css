@@ -192,3 +192,21 @@ button {
         grid-column: span 2; /* Spans full width across columns */
     }
 }
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu a { 
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 0.95rem; 
+    margin-left: 25px; 
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover { 
+    color: #ffd700; 
+}
