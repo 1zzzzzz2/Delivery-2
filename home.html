@@ -240,23 +240,87 @@ footer{
 }
 </style>
 </head>
+
 <body>
-    <div class="nav">
-        <img src="logo.png" alt="Car Sale Logo" class="logo">
+
+<!-- Navbar -->
+<div class="nav">
+    <div class="brand">
+        <img src="logo.png" class="logo" alt="Logo">
+        <h2>AutoHub</h2>
+    </div>
+
+    <div class="menu">
         <a href="index.html">Home</a>
-        <a href="login.html">Login Page</a>
-        <a href="register.html">Registration Page</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
         <a href="addcar.html">Add Car</a>
         <a href="search.html">Search</a>
     </div>
-    <div class="slogan">
-        <h1>Premium Auto Marketplace</h1>
-        <p>Find Your Dream Car With The Best Quality & Price</p>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <h1>Premium Auto Marketplace</h1>
+    <p>Buy and sell quality vehicles with trusted sellers, secure deals, and the best market prices.</p>
+
+    <div class="btn-group">
+        <button class="btn primary" onclick="welcome()">Explore Cars</button>
+        <button class="btn secondary" onclick="location.href='register.html'">Become Seller</button>
     </div>
-    <div class="feature-box">
-        <div class="box">We provide a professional online car trading platform, offering a wide range of new and used cars for buyers to choose from.</div>
-        <div class="box">We offer professional after-sales support and consulting services to solve all your car trading problems.</div>
-        <div class="box">Our goal is to create a safe, reliable and convenient car trading environment for every user.</div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+    <div class="stat-box">
+        <h2>5000+</h2>
+        <p>Cars Listed</p>
     </div>
+
+    <div class="stat-box">
+        <h2>3000+</h2>
+        <p>Happy Buyers</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>99%</h2>
+        <p>Trusted Deals</p>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+    <h2 class="title">Why Choose Us</h2>
+
+    <div class="grid">
+
+        <div class="box">
+            <h3>Wide Selection</h3>
+            <p>Choose from luxury, family, electric, and second-hand vehicles.</p>
+        </div>
+
+        <div class="box">
+            <h3>Secure Trading</h3>
+            <p>Safe communication and verified sellers for reliable transactions.</p>
+        </div>
+
+        <div class="box">
+            <h3>Best Price</h3>
+            <p>Compare listings instantly and get the most competitive offers.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Online Car Sale | AI Enhanced Homepage</p>
+</footer>
+
+<script>
+function welcome(){
+    alert("Welcome! Start searching your dream car now.");
+}
+</script>
+
 </body>
 </html>
