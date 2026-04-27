@@ -1,91 +1,66 @@
-const form = document.getElementById("registerForm");
+const form = document.getElementById("form");
+const success = document.getElementById("success");
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    document.getElementById("nameError").textContent = "";
-    document.getElementById("addressError").textContent = "";
-    document.getElementById("phoneError").textContent = "";
-    document.getElementById("emailError").textContent = "";
-    document.getElementById("usernameError").textContent = "";
-    document.getElementById("passwordError").textContent = "";
+    clearErrors();
+    success.textContent = "";
 
-    const name = form.elements["name"].value;
-    const email = form.elements["email"].value;
-    const phone = form.elements["phone"].value;
-    const password = form.elements["password"].value;
-    const address = form.elements["address"].value;
-    const username = form.elements["username"].value;
+    const data = new FormData(form);
+    let valid = true;
 
-    let isValid = true;
+    const fields = {
+        name: {
+            regex: /^[A-Za-z\s]+$/,
+            message: "Only letters and spaces"
+        },
+        address: {
+            regex: /^[A-Za-z0-9\s]+$/,
+            message: "Only letters and numbers"
+        },
+        phone: {
+            regex: /^1[3-9]\d{9}$/,
+            message: "Invalid phone number"
+        },
+        email: {
+            regex: /^[^\s@]+@[^\s@]+\.(com|cn)$/,
+            message: "Invalid email"
+        },
+        username: {
+            regex: /^[A-Za-z0-9]{6,}$/,
+            message: "At least 6 characters"
+        },
+        password: {
+            regex: /^[A-Za-z0-9]{6,}$/,
+            message: "At least 6 characters"
+        }
+    };
 
-    if (name.trim() === "") {
-        document.getElementById("nameError").textContent = "Name cannot be empty";
-        isValid = false;
+    for (let [key, rule] of Object.entries(fields)) {
+        const value = data.get(key).trim();
+        const group = form.querySelector(`[name="${key}"]`).parentElement;
+        const error = group.querySelector(".error");
+
+        if (value === "") {
+            error.textContent = "This field is required";
+            valid = false;
+            continue;
+        }
+
+        if (!rule.regex.test(value)) {
+            error.textContent = rule.message;
+            valid = false;
+        }
     }
 
-    if (address.trim() === "") {
-        document.getElementById("addressError").textContent = "Address cannot be empty";
-        isValid = false;
+    if (valid) {
+        success.textContent = "Registration successful!";
+        success.style.color = "green";
+        form.reset();
     }
-
-    if (phone.trim() === "") {
-        document.getElementById("phoneError").textContent = "Phone number cannot be empty";
-        isValid = false;
-    }
-
-    if (email.trim() === "") {
-        document.getElementById("emailError").textContent = "Email cannot be empty";
-        isValid = false;
-    }
-
-    if (username.trim() === "") {
-        document.getElementById("usernameError").textContent = "Username cannot be empty";
-        isValid = false;
-    }
-
-    if (password.trim() === "") {
-        document.getElementById("passwordError").textContent = "Password cannot be empty";
-        isValid = false;
-    }
-
-    const namePattern = /^[A-Za-z\s]+$/;
-    if (name !== "" && !namePattern.test(name)) {
-        document.getElementById("nameError").textContent = "Only letters and spaces allowed";
-        isValid = false;
-    }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.(com|cn)$/;
-    if (email !== "" && !emailPattern.test(email)) {
-        document.getElementById("emailError").textContent = "Invalid email format";
-        isValid = false;
-    }
-
-    const phonePattern = /^1[3-9]\d{9}$/;
-    if (phone !== "" && !phonePattern.test(phone)) {
-        document.getElementById("phoneError").textContent = "Invalid phone number";
-        isValid = false;
-    }
-
-    const passPattern = /^[A-Za-z0-9]{6,}$/;
-    if (password !== "" && !passPattern.test(password)) {
-        document.getElementById("passwordError").textContent = "At least 6 letters or numbers";
-        isValid = false;
-    }
-
-    const addressPattern = /^[A-Za-z0-9\s]+$/;
-    if (address !== "" && !addressPattern.test(address)) {
-        document.getElementById("addressError").textContent = "Only letters, numbers and spaces allowed";
-        isValid = false;
-    }
-
-    const userPattern = /^[A-Za-z0-9]{6,}$/;
-    if (username !== "" && !userPattern.test(username)) {
-        document.getElementById("usernameError").textContent = "At least 6 letters or numbers";
-        isValid = false;
-    }
-
-    if (!isValid) {
-    event.preventDefault();
-    }
-
 });
+
+function clearErrors() {
+    document.querySelectorAll(".error").forEach(e => e.textContent = "");
+}

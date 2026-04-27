@@ -1,11 +1,48 @@
-/* 页面基础样式 */
 body {
     background: url('back.jpg') no-repeat center center;
     background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     margin: 0;
+    font-family: Arial;
+}
+
+.nav {
+    background: rgba(0,0,0,0.7);
+    padding: 15px;
+    text-align: center;
+}
+
+.nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.logo {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.container {
+    width: 400px;
+    margin: 80px auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
 }
 
 .error {
@@ -13,63 +50,20 @@ body {
     font-size: 12px;
 }
 
-.nav 
-{
-    background: rgba(0,0,0,0.6);
-    padding: 15px;
-    text-align: center;
-}
-
-.logo {
-height: 30px;
-vertical-align: middle;
-} 
-
-/* 表单居中 */
-.menu {
-    margin: 0 auto;
-}
-
-.nav a {
-color: white;
-font-size: 18px;
-margin: 0 12px;
-text-decoration: none;
-}
-
-/* 表单外框 */
-.container {
-    width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.35);
-    border-radius: 8px;
-    backdrop-filter: blur(5px);
-}
-
-/* 输入框 */
-input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-
-/* 按钮 */
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background: #007BFF;
     color: white;
     border: none;
 }
 
-/* 标题居中 */
-h2 {
-    text-align: center;
+button:hover {
+    background: #0056b3;
 }
 
-/* 按钮悬停效果 */
-button:hover {
-    background-color: #0056b3;
+#success {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
 }

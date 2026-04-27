@@ -2,51 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Seller Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="nav">
-        <img src="logo.png" class="logo">
-        
-        <a href="home.html">Home Page</a >
-        <a href="login.html">Login Page</a>
-        <a href="search.html">Search Page</a >
-        <a href="addcar.html">Add Car</a >
-    </div>
-    <div class="container">
-    <h2>Seller Registration</h2>
+<nav class="nav">
+    <img src="logo.png" class="logo">
+    <a href="home.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="search.html">Search</a>
+    <a href="addcar.html">Add Car</a>
+</nav>
 
-    
-        <form id="registerForm">
-            <!-- 姓名 -->
-            <input type="text" name="name" placeholder="Name" required>
-            <span class="error" id="nameError"></span>
+<div class="container">
+    <h2>Create Seller Account</h2>
 
-            <!-- 地址 -->
-            <input type="text" name="address" placeholder="Address" required>
-            <span class="error" id="addressError"></span>
+    <form id="form">
 
-            <!-- 电话 -->
-            <input type="text" name="phone" placeholder="Phone Number" required>
-            <span class="error" id="phoneError"></span>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name">
+            <small class="error"></small>
+        </div>
 
-            <!-- 邮箱 -->
-            <input type="text" name="email" placeholder="Email Address" required>
-            <span class="error" id="emailError"></span>
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" name="address">
+            <small class="error"></small>
+        </div>
 
-            <!-- 用户名 -->
-            <input type="text" name="username" placeholder="Username" required>
-            <span class="error" id="usernameError"></span>
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="phone">
+            <small class="error"></small>
+        </div>
 
-            <!-- 密码 -->
-            <input type="password" name="password" placeholder="Password" required>
-            <span class="error" id="passwordError"></span>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email">
+            <small class="error"></small>
+        </div>
 
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username">
+            <small class="error"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" id="password">
+            <small class="error"></small>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <p id="success"></p>
+    </form>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
