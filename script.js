@@ -1,66 +1,95 @@
 const form = document.getElementById("form");
+const btn = document.getElementById("btn");
 const success = document.getElementById("success");
+const password = document.getElementById("password");
+const toggle = document.getElementById("toggle");
+const strength = document.querySelector(".strength");
+const card = document.getElementById("card");
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
+window.onload = () => {
+    card.style.opacity = 0;
+    card.style.transform = "translateY(40px)";
+    setTimeout(() => {
+        card.style.transition = "0.6s";
+        card.style.opacity = 1;
+        card.style.transform = "translateY(0)";
+    }, 100);
+};
 
-    clearErrors();
-    success.textContent = "";
-
-    const data = new FormData(form);
-    let valid = true;
-
-    const fields = {
-        name: {
-            regex: /^[A-Za-z\s]+$/,
-            message: "Only letters and spaces"
-        },
-        address: {
-            regex: /^[A-Za-z0-9\s]+$/,
-            message: "Only letters and numbers"
-        },
-        phone: {
-            regex: /^1[3-9]\d{9}$/,
-            message: "Invalid phone number"
-        },
-        email: {
-            regex: /^[^\s@]+@[^\s@]+\.(com|cn)$/,
-            message: "Invalid email"
-        },
-        username: {
-            regex: /^[A-Za-z0-9]{6,}$/,
-            message: "At least 6 characters"
-        },
-        password: {
-            regex: /^[A-Za-z0-9]{6,}$/,
-            message: "At least 6 characters"
-        }
-    };
-
-    for (let [key, rule] of Object.entries(fields)) {
-        const value = data.get(key).trim();
-        const group = form.querySelector(`[name="${key}"]`).parentElement;
-        const error = group.querySelector(".error");
-
-        if (value === "") {
-            error.textContent = "This field is required";
-            valid = false;
-            continue;
-        }
-
-        if (!rule.regex.test(value)) {
-            error.textContent = rule.message;
-            valid = false;
-        }
-    }
-
-    if (valid) {
-        success.textContent = "Registration successful!";
-        success.style.color = "green";
-        form.reset();
-    }
+document.addEventListener("mousemove", (e) => {
+    const x = (window.innerWidth / 2 - e.pageX) / 30;
+    const y = (window.innerHeight / 2 - e.pageY) / 30;
+    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 });
 
-function clearErrors() {
-    document.querySelectorAll(".error").forEach(e => e.textContent = "");
+const rules = {
+    name: /^[A-Za-z\s]+$/,
+    address: /^[A-Za-z0-9\s]+$/,
+    phone: /^1[3-9]\d{9}$/,
+    email: /^[^\s@]+@[^\s@]+\.(com|cn)$/,
+    username: /^[A-Za-z0-9]{6,}$/,
+    password: /^[A-Za-z0-9]{6,}$/
+};
+
+document.querySelectorAll("input").forEach(input => {
+    input.addEventListener("input", () => validate(input));
+});
+
+function validate(input) {
+    const value = input.value.trim();
+    const name = input.name;
+    const error = input.parentElement.querySelector(".error");
+
+    if (!value) {
+        error.textContent = "Required";
+        input.classList.add("invalid");
+        return false;
+    }
+
+    if (!rules[name].test(value)) {
+        error.textContent = "Invalid format";
+        input.classList.add("invalid");
+        return false;
+    }
+
+    error.textContent = "";
+    input.classList.remove("invalid");
+    input.classList.add("valid");
+    return true;
 }
+
+password.addEventListener("input", () => {
+    const val = password.value;
+    let score = 0;
+
+    if (val.length >= 6) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+
+    strength.style.width = score * 33 + "%";
+});
+
+toggle.onclick = () => {
+    password.type = password.type === "password" ? "text" : "password";
+};
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let valid = true;
+    document.querySelectorAll("input").forEach(i => {
+        if (!validate(i)) valid = false;
+    });
+
+    if (!valid) return;
+
+    btn.classList.add("loading");
+
+    setTimeout(() => {
+        btn.classList.remove("loading");
+        success.textContent = "✔ Registration Successful";
+        success.style.opacity = 1;
+        form.reset();
+        strength.style.width = "0";
+    }, 1500);
+});
