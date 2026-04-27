@@ -1,91 +1,95 @@
-const form = document.getElementById("registerForm");
+const form = document.getElementById("form");
+const btn = document.getElementById("btn");
+const success = document.getElementById("success");
+const password = document.getElementById("password");
+const toggle = document.getElementById("toggle");
+const strength = document.querySelector(".strength");
+const card = document.getElementById("card");
 
-form.addEventListener("submit", function(event) {
+window.onload = () => {
+    card.style.opacity = 0;
+    card.style.transform = "translateY(40px)";
+    setTimeout(() => {
+        card.style.transition = "0.6s";
+        card.style.opacity = 1;
+        card.style.transform = "translateY(0)";
+    }, 100);
+};
 
-    document.getElementById("nameError").textContent = "";
-    document.getElementById("addressError").textContent = "";
-    document.getElementById("phoneError").textContent = "";
-    document.getElementById("emailError").textContent = "";
-    document.getElementById("usernameError").textContent = "";
-    document.getElementById("passwordError").textContent = "";
+document.addEventListener("mousemove", (e) => {
+    const x = (window.innerWidth / 2 - e.pageX) / 30;
+    const y = (window.innerHeight / 2 - e.pageY) / 30;
+    card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
 
-    const name = form.elements["name"].value;
-    const email = form.elements["email"].value;
-    const phone = form.elements["phone"].value;
-    const password = form.elements["password"].value;
-    const address = form.elements["address"].value;
-    const username = form.elements["username"].value;
+const rules = {
+    name: /^[A-Za-z\s]+$/,
+    address: /^[A-Za-z0-9\s]+$/,
+    phone: /^1[3-9]\d{9}$/,
+    email: /^[^\s@]+@[^\s@]+\.(com|cn)$/,
+    username: /^[A-Za-z0-9]{6,}$/,
+    password: /^[A-Za-z0-9]{6,}$/
+};
 
-    let isValid = true;
+document.querySelectorAll("input").forEach(input => {
+    input.addEventListener("input", () => validate(input));
+});
 
-    if (name.trim() === "") {
-        document.getElementById("nameError").textContent = "Name cannot be empty";
-        isValid = false;
+function validate(input) {
+    const value = input.value.trim();
+    const name = input.name;
+    const error = input.parentElement.querySelector(".error");
+
+    if (!value) {
+        error.textContent = "Required";
+        input.classList.add("invalid");
+        return false;
     }
 
-    if (address.trim() === "") {
-        document.getElementById("addressError").textContent = "Address cannot be empty";
-        isValid = false;
+    if (!rules[name].test(value)) {
+        error.textContent = "Invalid format";
+        input.classList.add("invalid");
+        return false;
     }
 
-    if (phone.trim() === "") {
-        document.getElementById("phoneError").textContent = "Phone number cannot be empty";
-        isValid = false;
-    }
+    error.textContent = "";
+    input.classList.remove("invalid");
+    input.classList.add("valid");
+    return true;
+}
 
-    if (email.trim() === "") {
-        document.getElementById("emailError").textContent = "Email cannot be empty";
-        isValid = false;
-    }
+password.addEventListener("input", () => {
+    const val = password.value;
+    let score = 0;
 
-    if (username.trim() === "") {
-        document.getElementById("usernameError").textContent = "Username cannot be empty";
-        isValid = false;
-    }
+    if (val.length >= 6) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
 
-    if (password.trim() === "") {
-        document.getElementById("passwordError").textContent = "Password cannot be empty";
-        isValid = false;
-    }
+    strength.style.width = score * 33 + "%";
+});
 
-    const namePattern = /^[A-Za-z\s]+$/;
-    if (name !== "" && !namePattern.test(name)) {
-        document.getElementById("nameError").textContent = "Only letters and spaces allowed";
-        isValid = false;
-    }
+toggle.onclick = () => {
+    password.type = password.type === "password" ? "text" : "password";
+};
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.(com|cn)$/;
-    if (email !== "" && !emailPattern.test(email)) {
-        document.getElementById("emailError").textContent = "Invalid email format";
-        isValid = false;
-    }
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-    const phonePattern = /^1[3-9]\d{9}$/;
-    if (phone !== "" && !phonePattern.test(phone)) {
-        document.getElementById("phoneError").textContent = "Invalid phone number";
-        isValid = false;
-    }
+    let valid = true;
+    document.querySelectorAll("input").forEach(i => {
+        if (!validate(i)) valid = false;
+    });
 
-    const passPattern = /^[A-Za-z0-9]{6,}$/;
-    if (password !== "" && !passPattern.test(password)) {
-        document.getElementById("passwordError").textContent = "At least 6 letters or numbers";
-        isValid = false;
-    }
+    if (!valid) return;
 
-    const addressPattern = /^[A-Za-z0-9\s]+$/;
-    if (address !== "" && !addressPattern.test(address)) {
-        document.getElementById("addressError").textContent = "Only letters, numbers and spaces allowed";
-        isValid = false;
-    }
+    btn.classList.add("loading");
 
-    const userPattern = /^[A-Za-z0-9]{6,}$/;
-    if (username !== "" && !userPattern.test(username)) {
-        document.getElementById("usernameError").textContent = "At least 6 letters or numbers";
-        isValid = false;
-    }
-
-    if (!isValid) {
-    event.preventDefault();
-    }
-
+    setTimeout(() => {
+        btn.classList.remove("loading");
+        success.textContent = "✔ Registration Successful";
+        success.style.opacity = 1;
+        form.reset();
+        strength.style.width = "0";
+    }, 1500);
 });

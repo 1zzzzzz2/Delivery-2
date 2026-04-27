@@ -1,75 +1,174 @@
-/* 页面基础样式 */
 body {
-    background: url('back.jpg') no-repeat center center;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     margin: 0;
+    font-family: Arial;
+    background: url('back.jpg') center/cover no-repeat;
 }
 
+/* NAV */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 24px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    height: 26px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #00c6ff;
+}
+
+/* 卡片（关键：左右padding重新平衡🔥） */
+.container {
+    width: 400px;
+    margin: 65px auto;
+
+    padding: 30px 32px; /* ⭐ 左右加一点，解决“右边窄” */
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px);
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+/* 表单 */
+.form-group {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+/* 输入框（核心修复🔥） */
+input {
+    width: 100%;
+    padding: 12px 14px; /* ⭐ 左右对称 padding */
+
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+
+    box-sizing: border-box; /* ⭐ 防止宽度错位 */
+}
+
+/* 浮动 label */
+label {
+    position: absolute;
+    left: 14px; /* ⭐ 跟 input padding 对齐 */
+    top: 12px;
+    transition: 0.25s;
+    color: #555;
+}
+
+input:focus + label,
+input:valid + label {
+    top: -7px;
+    font-size: 12px;
+    color: #007BFF;
+}
+
+/* 错误提示 */
 .error {
     color: red;
     font-size: 12px;
 }
 
-.nav 
-{
-    background: rgba(0,0,0,0.6);
-    padding: 15px;
-    text-align: center;
+/* 密码输入框额外空间（避免挤压🔥） */
+.password-group input {
+    padding-right: 40px;
 }
 
-.logo {
-height: 30px;
-vertical-align: middle;
-} 
-
-/* 表单居中 */
-.menu {
-    margin: 0 auto;
+/* 👁 图标 */
+#toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
-.nav a {
-color: white;
-font-size: 18px;
-margin: 0 12px;
-text-decoration: none;
-}
-
-/* 表单外框 */
-.container {
-    width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.35);
-    border-radius: 8px;
-    backdrop-filter: blur(5px);
-}
-
-/* 输入框 */
-input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    box-sizing: border-box;
+/* 强度条 */
+.strength {
+    height: 4px;
+    background: linear-gradient(to right, red, yellow, green);
+    width: 0;
+    margin-top: 5px;
+    border-radius: 4px;
 }
 
 /* 按钮 */
 button {
     width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
+    padding: 13px;
+    border-radius: 10px;
     border: none;
+
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
 }
 
-/* 标题居中 */
-h2 {
+/* loading 动画 */
+.spinner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    animation: spin 1s linear infinite;
+    opacity: 0;
+}
+
+button.loading .spinner {
+    opacity: 1;
+}
+
+button.loading .btn-text {
+    opacity: 0;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* 成功提示 */
+#success {
     text-align: center;
-}
-
-/* 按钮悬停效果 */
-button:hover {
-    background-color: #0056b3;
+    margin-top: 10px;
+    opacity: 0;
+    color: green;
+    transition: 0.4s;
 }
